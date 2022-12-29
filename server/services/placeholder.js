@@ -13,9 +13,14 @@ module.exports = ({ strapi }) => ({
   async generate(url) {
     try {
       const settings = getService(strapi, 'settings').get();
-      const { plaiceholder: plaiceholderSettings, returnType } = settings;
+      const { plaiceholder: plaiceholderSettings } = settings;
       const plaiceholder = await getPlaiceholder(url, plaiceholderSettings);
-      return plaiceholder[returnType || 'base64'];
+      const returnType = settings.returnType || 'base64';
+
+      if (returnType === 'base64') {
+        return { base64: plaiceholder.base64 };
+      }
+      return plaiceholder[returnType];
     } catch (e) {
       strapi.log.error(e);
       return null;
