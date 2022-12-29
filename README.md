@@ -34,7 +34,10 @@ module.exports = {
   placeholder: {
     enabled: true,
     config: {
-      size: 10,
+      returnType: 'base64',
+      plaiceholder: {
+        size: 10,
+      },
     },
   },
 };
