@@ -6,6 +6,6 @@ module.exports = ({ strapi }) => {
 
   /* Update the Media Library File content type, adding the placeholder field */
   strapi.plugin('upload').contentTypes.file.attributes.placeholder = {
-    type: 'jsonb',
+    type: 'json',
   };
 };
