@@ -1,6 +1,6 @@
 # Strapi Placeholder Generator
 
-Generate base64 placeholders for [Strapi](https://strapi.io/) images.
+Generate placeholders for [Strapi](https://strapi.io/) images.
 
 ## 🖌️ Supported Content
 The Placeholder plugin currently supports the following formats:
