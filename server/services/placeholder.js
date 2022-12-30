@@ -5,9 +5,9 @@ const { getService } = require('../utils');
 
 module.exports = ({ strapi }) => ({
   /**
-   * Generates a base64 placeholder image for the given image.
+   * Generates a placeholder image for the given image.
    * @param {string} url a local or remote image URL to generate a placeholder for
-   * @returns {Promise<string>} a base64 encoded placeholder image
+   * @returns {Promise<string>} an encoded placeholder image
    */
 
   async generate(url) {
@@ -17,10 +17,14 @@ module.exports = ({ strapi }) => ({
       const plaiceholder = await getPlaiceholder(url, plaiceholderSettings);
       const returnType = settings.returnType || 'base64';
 
-      if (returnType === 'base64') {
-        return { base64: plaiceholder.base64 };
+      switch (returnType) {
+        case 'base64':
+          return plaiceholder.base64;
+        case 'blurhash':
+          return plaiceholder.blurhash.hash;
+        default:
+          return JSON.stringify(plaiceholder[returnType]);
       }
-      return plaiceholder[returnType];
     } catch (e) {
       strapi.log.error(e);
       return null;
